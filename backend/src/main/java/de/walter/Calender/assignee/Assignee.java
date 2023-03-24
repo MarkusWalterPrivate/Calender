@@ -2,6 +2,7 @@ package de.walter.Calender.assignee;
 
 import de.walter.Calender.task.Task;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class Assignee {
     @NotNull
     private String name;
     @NotNull
+    @Email
     private String email;
     @ManyToMany(mappedBy = "assignees")
     private List<Task> tasks;

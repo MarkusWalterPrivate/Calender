@@ -1,4 +1,4 @@
-package de.walter.Calender.task;
+package de.walter.Calender.assignee;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -14,31 +14,31 @@ import java.util.Optional;
 
 @RestController
 @Slf4j
-public class TaskController {
+public class AssigneeController {
 
     @Autowired
-    TaskRepository taskRep;
+    AssigneeRepository assigneeRep;
     @Autowired
-    TaskService taskService;
+    AssigneeService assigneeService;
 
-    @GetMapping("/task/{id}")
-    public ResponseEntity<Task> getTask(@PathVariable("id") long id){
-        Optional<Task> dbTask =taskRep.findById(id);
-        if (dbTask.isEmpty()){
-            return new ResponseEntity<>(dbTask.get(), HttpStatus.OK);
+    @GetMapping("/assignee/{id}")
+    public ResponseEntity<Assignee> getAssignee(@PathVariable("id") long id){
+        Optional<Assignee> dbAssignee =assigneeRep.findById(id);
+        if (dbAssignee.isEmpty()){
+            return new ResponseEntity<>(dbAssignee.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @GetMapping("/task")
-    public ResponseEntity<List<Task>> getAllTasks(){
-        List<Task> taskList = (ArrayList<Task>) taskRep.findAll();
-        return new ResponseEntity<>(taskList, HttpStatus.OK);
+    @GetMapping("/assignee")
+    public ResponseEntity<List<Assignee>> getAllTasks(){
+        List<Assignee> assigneesList = (ArrayList<Assignee>) assigneeRep.findAll();
+        return new ResponseEntity<>(assigneesList, HttpStatus.OK);
     }
 
     @PostMapping("task/create")
-    public ResponseEntity<Task> createTask(@Valid @RequestBody TaskCreationDTO newTask){
+    public ResponseEntity<Assignee> createAssignee(@Valid @RequestBody Assignee requestBody){
         try {
-            return new ResponseEntity<>(taskService.createTask(newTask), HttpStatus.CREATED);
+            return new ResponseEntity<>(assigneeService.createAssignee(requestBody), HttpStatus.CREATED);
         }catch (NoSuchElementException e){
             log.error("Assignee not found: ", e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -47,4 +47,6 @@ public class TaskController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 }
