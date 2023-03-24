@@ -17,19 +17,19 @@ public class TaskService {
     @Autowired
     AssigneeRepository assigneeRep;
 
-    protected Task createTask (TaskCreationDTO newTask) throws NoSuchElementException{
+    protected TaskReturnDTO createTask(TaskCreationDTO newTask) throws NoSuchElementException {
         Task task = new Task(newTask);
         List<Assignee> assigneeList = new ArrayList<>();
-        for (Long id: newTask.getAssigneeIds()) {
-            Optional<Assignee> dbAssignee =assigneeRep.findById(id);
-            if (dbAssignee.isPresent()){
+        for (Long id : newTask.getAssigneeIds()) {
+            Optional<Assignee> dbAssignee = assigneeRep.findById(id);
+            if (dbAssignee.isPresent()) {
                 assigneeList.add(dbAssignee.get());
-            }else{
+            } else {
                 throw new NoSuchElementException();
             }
         }
         task.setAssignees(assigneeList);
         Task savedTask = taskRep.save(task);
-        return savedTask;
+        return new TaskReturnDTO(savedTask);
     }
 }

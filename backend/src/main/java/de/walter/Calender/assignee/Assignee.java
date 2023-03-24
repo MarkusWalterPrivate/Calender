@@ -16,11 +16,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="assignees")
+@Table(name = "assignees")
 public class Assignee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long ID;
+    private long id;
     @NotNull
     private String name;
     @NotNull

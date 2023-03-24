@@ -8,7 +8,8 @@ public class AssigneeService {
     @Autowired
     AssigneeRepository assigneeRepository;
 
-    protected Assignee createAssignee(Assignee newAssignee){
-        return assigneeRepository.save(newAssignee);
+    protected AssigneeReturnDTO createAssignee(Assignee newAssignee) {
+        Assignee assignee = assigneeRepository.save(newAssignee);
+        return new AssigneeReturnDTO(assignee);
     }
 }
