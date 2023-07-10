@@ -7,7 +7,7 @@ The data is stored in a MariaDB database.
 
 No security feature is implemented.
 
-## Please view the ReadMe files in the api and frontend folder for detailed requirements and starting instructions
+## Please view the ReadMe files in the API and frontend folder for detailed requirements and starting instructions
 
 ### Requirements
 
@@ -15,7 +15,7 @@ No security feature is implemented.
 - MariaDB
 - Node.js
 
-### Quickstart
+### Quick-start
 
 Assuming all prerequisites are fulfilled, you can follow these instructions to get to know the application:
 - Start the API by navigating into its folder and executing `./mvnw spring-boot:run`.
